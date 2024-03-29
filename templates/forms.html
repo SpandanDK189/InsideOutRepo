@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Data Forms</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Financial Data Forms</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% if user_data %}
+    <main>
+        <section id="expenses-form">
+            <h2>Debit Form</h2>
+            <form method="POST" action="/debit">
+                <input type="hidden" name="form-type" value="expenses">
+                <div class="form-group">
+                    <label for="expenses-amount">Amount</label>
+                    <input type="text" id="expenses-amount" name="expenses-amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenses-date">Date</label>
+                    <input type="date" id="expenses-date" name="expenses-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenses-category">Category</label>
+                    <input type="text" id="expenses-category" name="expenses-category" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenses-description">Description</label>
+                    <input id="expenses-description" name="expenses-description" required></input>
+                </div>
+                <input type="hidden" id="user-id" name="user-id" value="{{ user_data[0] }}">
+                <input type="hidden" id="state-id" name="state-id" value="1">
+                <button type="submit" name="debitButton" value="debitButton">Add Debit</button>
+            </form>
+        </section>
+
+        <section id="income-form">
+            <h2>Credit Form</h2>
+            <form method="POST" action="/credit">
+                <input type="hidden" name="form-type" value="income">
+                <div class="form-group">
+                    <label for="income-amount">Amount</label>
+                    <input type="text" id="income-amount" name="income-amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="income-date">Date</label>
+                    <input type="date" id="income-date" name="income-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="income-category">Category</label>
+                    <input type="text" id="income-category" name="income-category" required>
+                </div>
+                <div class="form-group">
+                    <label for="income-description">Description</label>
+                    <textarea id="income-description" name="income-description" required></textarea>
+                </div>
+                <input type="hidden" id="user-id" name="user-id" value="{{ user_data[0] }}">
+                <input type="hidden" id="state-id" name="state-id" value="2">
+                <button type="submit" name="creditButton" value="creditButton">Add Credit</button>
+            </form>
+        </section>
+
+        <section id="investments-form">
+            <h2>Investments Form</h2>
+            <form method="POST" action="/investment">
+                <input type="hidden" name="form-type" value="investments">
+                <div class="form-group">
+                    <label for="investments-amount">Amount</label>
+                    <input type="text" id="investments-amount" name="investments-amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="investments-date">Date</label>
+                    <input type="date" id="investments-date" name="investments-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="investments-type">Type</label>
+                    <input type="text" id="investments-type" name="investments-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="investments-description">Description</label>
+                    <textarea id="investments-description" name="investments-description" required></textarea>
+                </div>
+                <input type="hidden" id="user-id" name="user-id" value="{{ user_data[0] }}">
+                <input type="hidden" id="state-id" name="state-id" value="3">
+                <button type="submit" name="investmentButton" value="investmentButton">Add Investments</button>
+            </form>
+        </section>
+    </main>
+    {% else %}
+        <p>Error fetching user details. Please try again.</p>
+    {% endif %}
+
+    <footer>
+        <p>&copy; 2024 Financial Data Forms</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

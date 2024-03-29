@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance Tracker - Authentication</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="auth-form" id="login-form">
+      <h2>Login</h2>
+      <form method="POST" action="/">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" name="submitbutton" value="login">Login</button>
+      </form>
+      {% if message %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      {% endif %}
+      <div class="auth-options">
+        <span>Don't have an account?</span>
+        <a href="#" id="signup-link">Sign Up</a>
+      </div>
+    </div>
+    <div class="auth-form hidden" id="signup-form">
+      <h2>Sign Up</h2>
+      <form method="POST" action="/">
+        <div class="form-group">
+          <label for="new-username">Username</label>
+          <input type="text" id="new-username" name="new-username" required>
+        </div>
+        <div class="form-group">
+          <label for="new-email">Email</label>
+          <input type="email" id="new-email" name="new-email" required>
+        </div>
+        <div class="form-group">
+          <label for="new-password">Password</label>
+          <input type="password" id="new-password" name="new-password" required>
+        </div>
+        <button type="submit" value="signup" name="submitbutton">Sign Up</button>
+      </form>
+      <div class="auth-options">
+        <span>Already have an account?</span>
+        <a href="#" id="login-link">Login</a>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
